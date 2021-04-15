@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Calculator</title>
+    <style>
+        body
+        {
+            background-color: #fff;
+            margin: 0px auto;
+        }
+        .appbody
+        {
+            background: #097C9B;
+            border: 1px solid #ff0;
+            padding: 20px;
+            margin: 0 auto;
+            min-width: 26em;
+            max-width: 26em;
+        }
+        h1
+        {
+            text-align: center;
+            font-size: 40px;
+            color: #003652;
+        }
+        #txtinput
+        {
+            text-align: right;
+            width: 23em;
+            height: 40px;
+            font-size: 18px;
+            background-color: #fff;
+            value: 0;
+        }
+        #errmsg
+        {
+            text-align: center;
+            width: 23em;
+            height: 40px;
+            font-size: 18px;
+            font-weight: 600;
+            background-color: #097C9B;
+            color:rgb(243, 240, 38);
+        }
+        #txtout
+        {
+            text-align: center;
+            width: 23em;
+            height: 40px;
+            font-size: 18px;
+            font-weight: 600;
+            background-color: #097C9B;
+            color:rgb(243, 240, 38);
+        }
+        #result
+        {
+            text-align: right;
+            width: 20em;
+            height: 35px;
+            font-size: 21px;
+            background-color: #fff;
+        }
+        button
+        {
+            background-color: #fff;
+            width: 80px;
+            height: 60px;
+            font-size: 20px;
+            border: 1px solid #097C9B;
+        }
+        .btn
+        {
+            background-color: #097C9B;
+            width: 80px;
+            height: 60px;
+            font-size: 20px;
+            border: 1px solid #097C9B;
+            color: #097C9B
+        }
+        .btn1
+        {
+            margin-left:50px;
+            background-color: #fff;
+            width: 125px;
+            height: 40px;
+            font-size: 16px;
+            border: 1px solid #097C9B;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculator</h1>
+    <div class="appbody">
+        <p id="txtout"></p>
+        <p id="txtinput">
+        </p>
+        <div id="calbutton">
+            <button id="num1" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="displayValue(this.id);" value="1">
+                1</button>
+                <button id="num2" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="displayValue(this.id);" value="2">
+                2</button>
+            <button id="num3" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="displayValue(this.id);" value="3">
+                3</button>
+            <button id="add" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="displayInput(this.value);" value="+">
+                +</button>
+            <button id="power" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="displayInput(this.value);" value="^">
+                ^</button>
+            <button id="num4" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="displayValue(this.id);" value="4">
+                4</button>
+            <button id="num5" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="displayValue(this.id);" value="5">
+                5</button>
+            <button id="num6" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="displayValue(this.id);" value="6">
+                6</button>
+            <button id="multiply" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="displayInput(this.value);" value="*">
+                *</button>
+            <button id="sqrt" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="spFunc(this.id);" value="sqrt">
+                Sqrt</button>
+            <button id="num7" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="displayValue(this.id);" value="7">
+                7</button>
+            <button id="num8" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="displayValue(this.id);" value="8">
+                8</button>
+            <button id="num9" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="displayValue(this.id);" value="9">
+                9</button>
+            <button id="subtract" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="displayInput(this.value);" value="-">
+                -</button>
+            <button id="clear" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="clearBox();" value="Clear">
+                Clear</button>
+            <button id="percent" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="displayInput(this.value);"value="%">
+                %</button>
+            <button id="num0" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="displayValue(this.id);" value="0">
+                0</button>
+            <button id="num00" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="displayValue(this.id);" value="00">
+                00</button>
+            <button id="divide" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="displayInput(this.value);" value="/">
+                /</button>
+            <button id="equals" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="Calculate();" value="=">
+                = </button>
+            <button id="dot" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="displayValue(this.id);" value=".">
+                .</button>
+            <button id="rnd" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="spFunc(this.id);" value="rnd">
+                Rnd</button>
+            <button id="flr" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="spFunc(this.id);" value="flr">
+                Flr</button>
+            <button id="cel" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="spFunc(this.id);" value="cel">
+                Ceil</button>
+            <button id="pi" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="displayValue(this.id);" value="pi">
+                Pi</button>
+      <button class = "btn" id = "empty1">
+                Min</button>
+            <button id="min" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="displayInput(this.value);" value="min">
+                Min</button>
+            <button id="max" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="displayInput(this.value);" value="max">
+                Max</button>
+            <button id="rand" onmouseover="setColor(this.id);" onmouseout="removeColor(this.id);"
+                onclick="rndNum();" value="rand">
+                Rand</button>
+            <button class = "btn" id = "empty2">
+                Max</button>
+            <p id="errmsg"></p>
+        </div>
+        <div class="divstyle">
+            <p style="background-color: cornsilk; width:410px">
+                <a href="HistoryObjects.html" style="margin-left: 20px; font-size: 20px">Home</a>
+                <br>
+                <br>
+                <a href="DigitalClock.html" style="margin-left: 20px; font-size: 20px">Digital Clock Application</a>
+                <br>
+                <br>
+                <a href="ToDoList.html" style="margin-left: 20px; font-size: 20px">To-Do-List Application</a>
+            </p>
+            <table>
+                <tr>
+                    <td >
+                        <button type="button" class = "btn1" id="GoNext" onclick="window.history.forward()">
+                            <strong>Next Page</strong></button>
+                    </td>
+                        <td >
+                        <button type="button" class = "btn1" id="GoBack" onclick="window.history.back()">
+                            <strong>Previous Page</strong></button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+  <script src="scripts\external.js">
+    </script>
+<script>
+     //Declare variables using the var keyword
+        var val1=0.0;
+        var val2=0.0;
+        var resultval=0.0;
+        var op;
+        var color = "#ffff80";
+        const piValue = 3.14;
+        document.getElementById("pi").value = piValue;
+        function setColor(id)
+        {
+           var element = document.getElementById(id);
+           element.style.backgroundColor = color;
+        }
+        function removeColor(id)
+        {
+           var color1=""
+           var element = document.getElementById(id);
+           element.style.backgroundColor = color1;
+        }
+        function displayValue(inputid)
+        {
+           var element = document.getElementById(inputid);
+           document.getElementById("txtinput").innerHTML = document.getElementById("txtinput").innerHTML + '' + element.value;
+        }
+        function displayInput(operation)
+        {
+            val1 = parseFloat(document.getElementById("txtinput").innerHTML);
+            op = operation;
+            document.getElementById("txtinput").innerHTML = op;
+            document.getElementById("txtinput").innerHTML ="";
+        }
+/*The Calculate() function will perform the
+mathematical operations such as addition, subtraction, multiplication, division,and modulus.*/
+        function Calculate()
+      {
+            val2 = parseFloat(document.getElementById("txtinput").innerHTML);
+            //document.getElementById("txtinput").innerHTML = "";
+            debugger;
+            try
+            {
+                if (op == "*")
+              {
+                    document.getElementById("txtinput").innerHTML = val1 * val2;
+                }
+                else if (op == "+")
+                {
+                    document.getElementById("txtinput").innerHTML = val1 + val2;
+                }
+                else if (op == "-")
+                {
+                    document.getElementById("txtinput").innerHTML = val1 - val2;
+                }
+                else if (op == "/")
+                {
+                    if (val2==0)
+            {
+                        throw("Divide by zero error. You cannot divide any number by zero." );
+                    }
+            else
+            {
+                        document.getElementById("txtinput").innerHTML = val1 / val2;
+                    }
+                }
+                else if (op == "%")
+                {
+                    resultval = val1 % val2;
+                }
+                else if (op == "^")
+                {      
+                    document.getElementById("txtinput").innerHTML = Math.pow(val1, val2);                      
+                }
+                else if (op == "min")
+                {      
+                    document.getElementById("txtinput").innerHTML = Math.min(val1, val2);                      
+                }
+                else if (op == "max")
+                {      
+                    document.getElementById("txtinput").innerHTML = Math.max(val1, val2);                      
+                }
+                      
+            }
+            catch(e)
+            {
+                document.getElementById("errmsg").innerHTML = "ERROR!! " + e;
+                document.getElementById("txtinput").innerHTML = "";
+            }
+            finally
+            {
+                document.getElementById("txtout").innerHTML = "Calculation complete!"
+            }
+            return;
+        }
+        function spFunc (id)
+        {
+            val1 = parseFloat(document.getElementById("txtinput").innerHTML);
+            if (id == "rnd")
+            {        
+                document.getElementById("txtinput").innerHTML = Math.round(val1);
+                 
+            }
+            else if (id == "flr")
+            {        
+                document.getElementById("txtinput").innerHTML = Math.floor(val1);                    
+            }
+            else if (id == "cel")
+            {        
+                document.getElementById("txtinput").innerHTML = Math.ceil(val1);
+                        
+            }
+            else if (id == "sqrt")
+            {    
+                document.getElementById("txtinput").innerHTML = Math.sqrt(val1);
+                     
+            }
+            document.getElementById("txtout").innerHTML = "Calculation complete!"
+        }
+        function rndNum()
+        {
+            document.getElementById("txtinput").innerHTML = Math.random();
+        }
+             
+        function clearBox()
+        {
+            document.getElementById("txtinput").innerHTML = "";
+            document.getElementById("txtout").innerHTML = "";
+            document.getElementById("errmsg").innerHTML = "";
+            return;
+        }
+    </script>
+</body>
+</html>
